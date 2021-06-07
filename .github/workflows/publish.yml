@@ -1,6 +1,8 @@
 name: Publish to npm
 
-on: push
+on:
+  release:
+    types: [published]
 
 jobs:
   publish:
@@ -8,6 +10,12 @@ jobs:
     steps:
       - name: git-checkout
         uses: actions/checkout@v2
+
+      - name: Install all dependencies
+        run: npm install
+
+      - name: Test
+        run: npm test
 
       - uses: JS-DevTools/npm-publish@v1
         with:
