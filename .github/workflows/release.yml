@@ -20,7 +20,14 @@ jobs:
       - name: Test
         run: npm test
 
-      - uses: "marvinpinto/action-automatic-releases@latest"
+
+      - name: Automatic release
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.PAT_TOKEN }}"
           prerelease: false
+
+      - name: Publish to npm
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
